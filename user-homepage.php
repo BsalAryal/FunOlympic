@@ -9,6 +9,12 @@
 </head>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+    * {
+        font-family: 'Lexend', sans-serif;
+    }
+
     .container {
         width: 90%;
         margin: 2.5em auto;

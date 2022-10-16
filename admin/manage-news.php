@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Manage Live</title>
+    <title>Manage News</title>
 </head>
 
 <style>
@@ -96,17 +96,18 @@
         <div class="bottom-section">
             <!--form-->
             <form action="" method="post">
-                <input type="text" name="live-title" id="" placeholder="Title of the live stream..">
-                <input type="text" name="url" id="" placeholder="URL or link..">
-                <select name="category" id="">
+                <input type="text" name="video-title" id="" placeholder="Title of the news..">
+                <textarea name="" id="" cols="10" rows="10" placeholder="Description of the news.."></textarea>
+                <select name="" id="">
                     <option value="default">Select a category</option>
                 </select>
+                <input type="file" name="" id="">
                 <input type="submit" value="Add">
             </form>
             <!--table-->
             <table>
                 <thead>
-                    <th>Video Title</th>
+                    <th>News Title</th>
                     <th>Description</th>
                     <th>Upload Date</th>
                     <th>Actions</th>
