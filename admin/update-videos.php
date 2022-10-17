@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Manage Fixtures</title>
+    <title>Manage Videos</title>
 </head>
 
 <style>
@@ -45,13 +45,12 @@
         margin-right: .25em;
     }
 
-    .bottom-section {
+    .bottom-section{
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
     }
-
-    table {
+    table{
         width: 55%;
     }
 
@@ -81,8 +80,8 @@
         font-weight: bolder;
     }
 
-    input[type=file] {
-        border: none;
+    input[type=file]{
+        border:none;
     }
 </style>
 
@@ -97,19 +96,20 @@
         <div class="bottom-section">
             <!--form-->
             <form action="" method="post">
-                <input type="text" name="fixture-title" id="" placeholder="Title of the fixture..">
-                <input type="date" name="fixture-date" id="">
-                <input type="time" name="fixture-time" id="">
+                <input type="text" name="video-title" id="" placeholder="Title of the video..">
+                <textarea name="" id="" cols="10" rows="10" placeholder="Description of the video.."></textarea>
                 <select name="" id="">
                     <option value="default">Select a category</option>
                 </select>
-                <input type="submit" value="Add">
+                <input type="file" name="" id="">
+                <input type="submit" value="Update">
             </form>
             <!--table-->
             <table>
                 <thead>
-                    <th>Fixture Title</th>
-                    <th>Category</th>
+                    <th>Video Title</th>
+                    <th>Description</th>
+                    <th>Upload Date</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>

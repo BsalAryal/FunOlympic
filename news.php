@@ -55,7 +55,7 @@
         <div class="card-section">
             <div class="card">
                 <img src="./images/logo.png" alt="">
-                <p>$video_title</p>
+                <p>$news_title</p>
                 <p>$date</p>
                 <a href="">View</a>
             </div>

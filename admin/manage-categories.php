@@ -102,7 +102,7 @@
             <!--table-->
             <table>
                 <thead>
-                    <th>Video Title</th>
+                    <th>Category Title</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>

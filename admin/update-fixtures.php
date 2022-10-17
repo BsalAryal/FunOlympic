@@ -103,7 +103,7 @@
                 <select name="" id="">
                     <option value="default">Select a category</option>
                 </select>
-                <input type="submit" value="Add">
+                <input type="submit" value="Update">
             </form>
             <!--table-->
             <table>
