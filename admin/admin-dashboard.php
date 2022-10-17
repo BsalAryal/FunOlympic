@@ -144,7 +144,7 @@
                 <i class="fa-solid fa-image"></i>
                 <h3>Photos</h3>
                 <p>$total_photos</p>
-                <a href="../admin/manage-photos"><i class="fa-solid fa-gear"></i></a>
+                <a href="../admin/manage-photos.php"><i class="fa-solid fa-gear"></i></a>
             </div>
             <div class="fixtures">
                 <i class="fa-solid fa-ranking-star"></i>
