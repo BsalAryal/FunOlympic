@@ -87,7 +87,7 @@
         justify-items: center;
     }
 
-    .fixtures-section .card-section{
+    .fixtures-section .card-section {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -95,7 +95,7 @@
     }
 
 
-    .fixture-card{
+    .fixture-card {
         width: 80%;
         height: auto;
         padding: .75em 1.5em;
@@ -108,22 +108,22 @@
         font-size: .92em;
     }
 
-    .fixture-card p{
+    .fixture-card p {
         margin: .15em 0;
         font-weight: .5em;
     }
 
-    .fixture-card p:first-of-type{
+    .fixture-card p:first-of-type {
         font-weight: bolder;
         color: #0175a7;
     }
 
-    .fixture-card p:nth-of-type(2){
+    .fixture-card p:nth-of-type(2) {
         color: grey;
         font-weight: bold;
     }
 
-    .fixture-card p:last-of-type{
+    .fixture-card p:last-of-type {
         font-weight: bold;
     }
 
@@ -150,7 +150,7 @@
         border-radius: .25em;
         margin-top: 1em;
     }
-   
+
     .news-card {
         width: 90%;
         height: 18em;
@@ -159,7 +159,8 @@
         overflow: hidden;
     }
 
-    .news-card p, .news-card a {
+    .news-card p,
+    .news-card a {
         margin: .75em 0 .75em .75em;
     }
 
@@ -173,12 +174,10 @@
         margin-top: 1em;
     }
 
-    .news-card img{
+    .news-card img {
         width: 100%;
         height: 60%;
     }
-
-
 </style>
 
 
@@ -266,31 +265,24 @@
         <div class="fixtures-section">
             <h3>Fixtures</h3>
             <div class="card-section">
-            <div class="fixture-card">
-                    <p>$fixture_title</p>
-                    <p>Sports: $category</p>
-                    <p>Date: $fixture_date</p>
-                </div>
-                <div class="fixture-card">
-                    <p>$fixture_title</p>
-                    <p>Sports: $category</p>
-                    <p>Date: $fixture_date</p>
-                </div>
-                <div class="fixture-card">
-                    <p>$fixture_title</p>
-                    <p>Sports: $category</p>
-                    <p>Date: $fixture_date</p>
-                </div>
-                <div class="fixture-card">
-                    <p>$fixture_title</p>
-                    <p>Sports: $category</p>
-                    <p>Date: $fixture_date</p>
-                </div>
-                <div class="fixture-card">
-                    <p>$fixture_title</p>
-                    <p>Sports: $category</p>
-                    <p>Date: $fixture_date</p>
-                </div>
+                <?php
+                global $connection;
+                $query = "SELECT * FROM fixtures ORDER BY fixid DESC LIMIT 5";
+                $result = mysqli_query($connection, $query);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $title = $row['fixtures'];
+                    $sports = $row['fixture_category'];
+                    $time = $row['fixture_date'] . " / " . $row['fixture_time'];
+                    echo "
+           <div class='fixture-card'>
+           <p>$title</p>
+           <p>Sports: $sports</p>
+           <p>Date: $time</p>
+           </div>
+           ";
+                }
+
+                ?>
             </div>
         </div>
     </div>
