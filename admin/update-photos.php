@@ -83,6 +83,27 @@
     input[type=file]{
         border:none;
     }
+
+    table thead{
+        background-color: #0175a7;
+        color: white;
+        font-weight: bolder;
+    }
+
+    table thead th{
+        padding: .75em .5em;
+        text-align: start;
+
+    }
+
+    table tbody tr td{
+        padding: .75em .5em;
+        text-align: start;
+    }
+
+   tbody tr:nth-of-type(odd){
+        background-color: #E8E8E8;
+    }
 </style>
 
 <body>

@@ -1,3 +1,4 @@
+<?php include "functions.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,12 +122,19 @@
         <form action="./search.html" method="post">
             <input type="search" name="search" placeholder="Search...">
         </form>
+        <?php
+    $email = $_SESSION['email'];
+    $user_profile = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email'");
+    while($row=mysqli_fetch_assoc($user_profile)){
+        $profile_image = $row['profile_image'];
+    }
+    ?>
         <a href="profile.php">
-            <i class="fa-solid fa-user"></i>
+            <img src="images/<?php echo $profile_image ?>" alt="" height=20 width=20 style="border-radius:50%">
             Profile
         </a>
         <!--logout-->
-        <form action="./logout.php">
+        <form action="logout.php">
             <button type="submit">Logout</button>
         </form>
         </div>

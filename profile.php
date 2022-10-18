@@ -51,7 +51,7 @@
         margin: .75em 0;
     }
 
-    .container form button{
+    .container a{
         width: auto;
         height: auto;
         padding: 1em 3em;
@@ -63,12 +63,12 @@
         cursor: pointer;
     }
 
-    .container form button:first-of-type{
+    .container a:first-of-type{
       background-color: #0175a7;
       margin-right: .75em;
     }
 
-    .container form button:last-of-type{
+    .container a:last-of-type{
         background-color: red;
     }
 
@@ -77,28 +77,49 @@
 
 <body>
     <?php include('header.php')?>
+    <?php
+    $email = $_SESSION['email'];
+    if(isset($_GET['reset'])){
+        if(request_password_reset($email));
+        $success_message="Your request has been submitted successfully. You'll be provided with password reset link througn your mail.";
+    }
+    $user_profile = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email'");
+    while($row=mysqli_fetch_assoc($user_profile)){
+        $fullname = $row['full_name'];
+        $email = $row['email'];
+        $country = $row['country'];
+        $date = $row['date'];
+        $profile_image = $row['profile_image'];
+    }
+    ?>
     <div class="container">
+    <p style="color:green">
+    <?php
+        echo isset($success_message)?$success_message:'';
+    ?>
+    </p>
+    <p style="text-align:center">
+    <img src="images/<?php echo $profile_image?>" alt="" height=100 width=100 style="border-radius:50%"></p>
         <div class="display-block">
             <p>Fullname</p>
-            <p>$fullname</p>
+            <p><?php echo $fullname ?></p>
         </div>
         <div class="display-block">
             <p>Email</p>
-            <p>$email</p>
+            <p><?php echo $email ?></p>
         </div>
         <div class="display-block">
             <p>Country</p>
-            <p>$country</p>
+            <p><?php echo $country ?></p>
         </div>
         <div class="display-block">
-            <p>Phone Number</p>
-            <p>$phone_number</p>
+            <p>Joined Date</p>
+            <p><?php echo $date ?></p>
         </div>
 
-        <form action="" method="post">
-            <button type="submit" name="edit-profile">Edit Profile</button>
-            <button type="submit" name="reset-password">Reset Password</button>
-        </form>
+        
+            <a type="submit" name="edit-profile">Edit Profile</a>
+            <a href="profile.php?reset" onClick="javascript: return confirm('Are you sure you want to reset?')">Reset Password</a>
     </div>
 </body>
 

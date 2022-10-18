@@ -1,3 +1,29 @@
+<?php include "../functions.php";
+if(isset($_GET['edit'])){
+    $get_category_id = $_GET['edit'];
+    $get_title = $_GET['title'];
+}
+if(isset($_POST['category-title'])){
+    $title = $_POST['category-title'];
+    $error = [
+        'title'=> '',
+    ];
+    if($title==''){
+        $error['title'] = 'Title cannot be empty.';
+    }
+    foreach ($error as $key => $value){
+        if(empty($value)){
+            unset($error[$key]);
+        }
+    }
+    if(empty($error)){
+      if(update_category($title)){
+        $message = "Category updated successfully";
+      }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,6 +109,27 @@
     input[type=file]{
         border:none;
     }
+
+    table thead{
+        background-color: #0175a7;
+        color: white;
+        font-weight: bolder;
+    }
+
+    table thead th{
+        padding: .75em .5em;
+        text-align: start;
+
+    }
+
+    table tbody tr td{
+        padding: .75em .5em;
+        text-align: start;
+    }
+
+   tbody tr:nth-of-type(odd){
+        background-color: #E8E8E8;
+    }
 </style>
 
 <body>
@@ -96,7 +143,10 @@
         <div class="bottom-section">
             <!--form-->
             <form action="" method="post">
-                <input type="text" name="video-title" id="" placeholder="Title of the category..">
+                <input type="text" name="category-title" id="" value="<?php echo isset($get_title)?$get_title:'' ?>">
+                <p style="font-size:12px; color:red">
+                        <?php echo isset($error['title']) ? $error['title'] : '' ?>
+                    </p>
                 <input type="submit" value="Update">
             </form>
             <!--table-->
@@ -106,10 +156,21 @@
                     <th>Actions</th>
                 </thead>
                 <tbody>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                <?php
+                    delete_categories();
+                    $select_category = mysqli_query($connection, "SELECT * FROM categories");
+                    while($row = mysqli_fetch_assoc($select_category)){
+                        $category_id = $row['category_id'];
+                        $title = $row['title'];
+                    ?>
+                    <tr>
+                        <?php
+                            echo "<td>$title</td>";
+                            echo "<td><a href='update-categories.php?edit=$category_id&title=$title'>Edit</a></td>";
+                            echo "<td><a href='manage-categories.php?delete=$category_id&title=$title' style='color:red' onClick=\"javascript: return confirm('Are you sure you want to delete? All contents associated to this category will also be deleted.'); \">Delete</a></td>";
+                        ?>
+                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

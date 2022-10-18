@@ -1,3 +1,39 @@
+<?php
+include "functions.php";
+if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $error = [
+		'password'=> '',
+		'email'=>'',	
+	];
+    if($email==''){
+        $error['email'] = 'Email cannot be empty';
+    }
+    if($password == ''){
+        $error['password'] = 'Password cannot be empty';
+    }
+    if(!empty($email) && !is_verified($email)){
+        $error['email'] = 'Email not verified';
+    }
+    if(!empty($email) && !email_exists($email)){
+        $error['email'] = 'Email does not exist';
+    }
+    
+    if(!empty($email) && is_verified($email) && email_exists($email) && !user_login($email, $password)){
+        $error['email'] = 'Check your email and passsword';
+}
+    foreach ($error as $key => $value){
+		if(empty($value)){
+			unset($error[$key]);
+		}
+	}
+	
+	if(empty($error)){
+        $user_login($email, $password);
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +66,8 @@
         background-color: white;
         width: 30em;
         min-width: 25em;
-        height: 25em;
-        min-height: 25em;
+        height: 30em;
+        min-height: 30em;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -104,11 +140,16 @@
         </div>
         <form action="" method="post">
             <input type="text" name="email" placeholder="Email">
+            <p style="font-size:12px; color:red">
+            <?php echo isset($error['email']) ? $error['email'] : '' ?></p>
             <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Login">
+            <p style="font-size:12px;color:red">
+            <?php echo isset($error['password']) ? $error['password'] : '' ?></p>
+            <input type="submit" name="login" value="Login">
         </form>
 
-        <a href="register.html">Create an account</a>
+        <a href="register.php">Create an account</a>
+        <a href="forgot_password.php" style="margin-top: -2px; font-size:12px; color: blue">Forgot Password?</a>
     </div>
 </body>
 

@@ -1,3 +1,25 @@
+<?php include "../functions.php";
+if(isset($_POST['category-title'])){
+    $title = $_POST['category-title'];
+    $error = [
+        'title'=> '',
+    ];
+    if($title==''){
+        $error['title'] = 'Title cannot be empty.';
+    }
+    foreach ($error as $key => $value){
+        if(empty($value)){
+            unset($error[$key]);
+        }
+    }
+    if(empty($error)){
+      if(add_category($title)){
+        $message = "Category added successfully";
+      }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,23 +115,39 @@
                 <p>Back to dashboard</p>
             </a>
         </div>
+        <p style="color:green"><?php echo isset($message)?$message:'' ?></p>
         <div class="bottom-section">
+            
             <!--form-->
             <form action="" method="post">
-                <input type="text" name="video-title" id="" placeholder="Title of the category..">
+                <input type="text" name="category-title" id="" placeholder="Title of the category..">
+                <p style="font-size:12px; color:red">
+                        <?php echo isset($error['title']) ? $error['title'] : '' ?>
+                    </p>
                 <input type="submit" value="Add">
             </form>
             <!--table-->
             <table>
                 <thead>
                     <th>Category Title</th>
-                    <th>Actions</th>
+                    <th colspan="2">Actions</th>
                 </thead>
                 <tbody>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    <?php
+                    delete_categories();
+                    $select_category = mysqli_query($connection, "SELECT * FROM categories");
+                    while($row = mysqli_fetch_assoc($select_category)){
+                        $category_id = $row['category_id'];
+                        $title = $row['title'];
+                    ?>
+                    <tr>
+                        <?php
+                            echo "<td>$title</td>";
+                            echo "<td><a href='update-categories.php?edit=$category_id&title=$title'>Edit</a></td>";
+                            echo "<td><a href='manage-categories.php?delete=$category_id&title=$title' style='color:red' onClick=\"javascript: return confirm('Are you sure you want to delete? All contents associated to this category will also be deleted.'); \">Delete</a></td>";
+                        ?>
+                    </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

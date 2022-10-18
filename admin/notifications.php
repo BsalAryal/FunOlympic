@@ -1,3 +1,6 @@
+<?php include "../functions.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Manage Fixtures</title>
+    <title>Password Reset Requests</title>
 </head>
 
 <style>
@@ -41,69 +44,33 @@
         justify-content: flex-start;
     }
 
-    .top-section a i {
-        margin-right: .25em;
-    }
-
-    .bottom-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    table {
+    table{
         width: 55%;
     }
 
-    form {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        font-size: .9em;
-        margin: .75em 0;
-        padding: .5em .25em;
-        outline: none;
-        border: .1em solid #0175a7;
-        border-radius: .25em;
-    }
-
-    input[type=submit] {
-        background-color: #0175a7;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-weight: bolder;
-    }
-
-    input[type=file] {
-        border: none;
-    }
-
-    table thead {
+    table thead{
         background-color: #0175a7;
         color: white;
         font-weight: bolder;
     }
 
-    table thead th {
+    table thead th{
         padding: .75em .5em;
         text-align: start;
 
     }
 
-    table tbody tr td {
+    table tbody tr td{
         padding: .75em .5em;
         text-align: start;
     }
 
-    tbody tr:nth-of-type(odd) {
+   tbody tr:nth-of-type(odd){
         background-color: #E8E8E8;
+    }
+
+    .top-section a i {
+        margin-right: .25em;
     }
 </style>
 
@@ -116,28 +83,32 @@
             </a>
         </div>
         <div class="bottom-section">
-            <!--form-->
-            <form action="" method="post">
-                <input type="text" name="fixture-title" id="" placeholder="Title of the fixture..">
-                <input type="date" name="fixture-date" id="">
-                <input type="time" name="fixture-time" id="">
-                <select name="" id="">
-                    <option value="default">Select a category</option>
-                </select>
-                <input type="submit" value="Add">
-            </form>
-            <!--table-->
-            <table>
+            <?php echo isset($request_message)?$request_message:'' ?>
+             <!--table-->
+             <table>
                 <thead>
-                    <th>Fixture Title</th>
-                    <th>Category</th>
-                    <th>Actions</th>
+                    <th>Email</th>
+                    <th>Requested Date</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    <?php
+                    if(isset($_GET['reset'])){
+                        $get_email = $_GET['reset'];
+                        if(send_mail_after_password_reset($get_email)){
+                            $request_message="Email has been sent to $get_email.";
+                        }
+                    }
+                    $select_request = mysqli_query($connection, "SELECT * FROM password_reset_request");
+                    while($row = mysqli_fetch_assoc($select_request)){
+                        $email = $row['email'];
+                        $requested_date = $row['requested_date'];
+                    echo "<tr>
+                        <td>$email</td>
+                        <td>$requested_date</td>
+                        <td><a href='notifications.php?reset=$email' style='color:red'>Reset</a></td>
+                        </tr>";
+                     } ?>
                 </tbody>
             </table>
         </div>

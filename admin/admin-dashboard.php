@@ -1,3 +1,4 @@
+<?php include "../functions.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,9 +62,11 @@
     .bottom-section {
         width: 100%;
         height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20em, 20em));
+        grid-template-rows: repeat(auto-fit, minmax(10em, 10em));
+        row-gap: 1.5em;
+        column-gap: .5em;
         padding: .75em 1.5em;
     }
 
@@ -86,8 +89,6 @@
         margin: .15em 0;
     }
 
-    
-
     .bottom-section div a{
         text-decoration: none;
         font-size: 1.35em;
@@ -107,11 +108,16 @@
             </a>
             <a href="../admin/notifications.php">
                 <i class="fa-solid fa-bell"></i>
-                <p>Notifications</p>
+                <p>Reset<br>Notifications</p>
+                <span style="background:red; color:white; padding:2px 4px; border-radius:6px"><?php echo count_result('password_reset_request') ?><span>
             </a>
-            <a href="../user-homepage.php">
+            <a href="../user-homepage.php" target="_blank">
                 <i class="fa-solid fa-eye"></i>
                 <p>View Website</p>
+            </a>
+            <a href="../logout.php" style="color:red">
+            <i class="fa-solid fa-right-from-bracket" style="color:red"></i>
+                <p>Logout</p>
             </a>
         </div>
         <!--bottom section-->
