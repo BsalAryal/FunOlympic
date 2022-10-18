@@ -52,8 +52,7 @@
                 <video width="100%" height="50%" controls>
                     <source src="./uploads/highlight.avi" type="video/mp4">
                 </video>
-                <p>$video_title
-                <p>
+                <p>$video_title<p>
                 <p>$upload_date</p>
                 <a href="">View</a>
             </div>
