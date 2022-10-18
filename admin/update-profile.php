@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Profile</title>
 </head>
 
@@ -47,73 +48,87 @@
 
     .container form {
         display: flex;
+        flex-direction: column;
         width: auto;
         margin: .75em 0;
+    }
+
+    .container form input {
+        width: 70%;
+        height: 2.75em;
+        outline: none;
+        border: none;
+        border-radius: .25em;
+        background-color: rgba(128, 128, 128, 0.15);
+        margin: .3em 0;
+        padding: 0 0 0 .75em;
+        font-size: .9em;
+    }
+
+    .display-block {
+        display: flex;
+        align-items: center;
     }
 
     .container form button {
         width: auto;
         height: auto;
-        padding: 1em 3em;
-        border: none;
-        border-radius: .25em;
+        padding: .75em 2.15em;
+        background-color: #A438FF;
         color: white;
-        font-size: .9em;
-        font-weight: bolder;
+        font-weight: bold;
         cursor: pointer;
+        border: none;
+        border-radius: .5em;
     }
 
-    .container form button:first-of-type {
-        background-color: #0175a7;
-        margin-right: .75em;
-    }
-
-    .container form button:last-of-type {
-        background-color: red;
-    }
-
-    table thead{
-        background-color: #0175a7;
-        color: white;
-        font-weight: bolder;
-    }
-
-    table thead th{
-        padding: .75em .5em;
-        text-align: start;
+    a {
+        display: flex;
+        color: #0175a7;
+        font-size: 1.25em;
+        font-weight: bold;
+        text-decoration: none;
+        align-items: center;
+        justify-content: flex-start;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translateX(-50%);
 
     }
 
-    table tbody tr td{
-        padding: .75em .5em;
-        text-align: start;
-    }
-
-   tbody tr:nth-of-type(odd){
-        background-color: #E8E8E8;
+    a i {
+        margin-right: .25em;
     }
 </style>
 
 <body>
-    <?php include('header.php') ?>
+    <a href="../admin/admin-dashboard.php">
+        <i class="fa-solid fa-arrow-left-long"></i>
+        <p>Back to dashboard</p>
+    </a>
     <div class="container">
         <h2>Edit Profile Details</h2>
-        <div class="display-block">
-            <p>Fullname</p>
-            <input type="text" name="fullname" id="" placeholder="Full Name">
-        </div>
-        <div class="display-block">
-            <p>Email</p>
-            <input type="text" name="email" id="" placeholder="Email">
-        </div>
-        <div class="display-block">
-            <p>Country</p>
-            <input type="text" name="country" id="" placeholder="Country">
-        </div>
-        <div class="display-block">
-            <p>Phone Number</p>
-            <input type="text" name="phone-number" id="" placeholder="Phone Number">
-        </div>
+        <form action="" method="post">
+            <div class="display-block">
+                <p>Fullname</p>
+                <input type="text" name="fullname" id="" placeholder="Full Name">
+            </div>
+            <div class="display-block">
+                <p>Email</p>
+                <input type="text" name="email" id="" placeholder="Email">
+            </div>
+            <div class="display-block">
+                <p>Country</p>
+                <input type="text" name="country" id="" placeholder="Country">
+            </div>
+            <div class="display-block">
+                <p>Phone Number</p>
+                <input type="text" name="phone-number" id="" placeholder="Phone Number">
+            </div>
+
+            <button type="submit">Update profile details</button>
+        </form>
     </div>
 </body>
 
