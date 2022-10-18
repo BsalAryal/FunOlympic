@@ -1,3 +1,7 @@
+<?php
+include('./database.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,21 +93,24 @@
       </div>
 
       <div class="fixture-card-section">
-        <div class="fixture-card">
-          <p>$fixture_title</p>
-          <p>Sports: $category</p>
-          <p>Date: $fixture_date</p>
-        </div>
-        <div class="fixture-card">
-          <p>$fixture_title</p>
-          <p>Sports: $category</p>
-          <p>Date: $fixture_date</p>
-        </div>
-        <div class="fixture-card">
-          <p>$fixture_title</p>
-          <p>Sports: $category</p>
-          <p>Date: $fixture_date</p>
-        </div>
+        <?php
+        global $connection;
+        $query = "SELECT * FROM fixtures ORDER BY fixid DESC LIMIT 3";
+        $result = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_assoc($result)) {
+          $title = $row['fixtures'];
+          $sports = $row['fixture_category'];
+          $time = $row['fixture_date'] . " / " . $row['fixture_time'];
+          echo "
+           <div class='fixture-card'>
+           <p>$title</p>
+           <p>Sports: $sports</p>
+           <p>Date: $time</p>
+           </div>
+           ";
+        }
+
+        ?>
       </div>
     </div>
   </div>
